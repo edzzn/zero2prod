@@ -2,9 +2,13 @@ use sqlx::postgres::PgPool;
 use std::net::TcpListener;
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
+use env_logger::Env;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
+    
+
     let configuration = get_configuration().expect("Failed to read configuration.");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
         .await
@@ -12,7 +16,7 @@ async fn main() -> std::io::Result<()> {
 
     // Here we choose to bind explicitly to localhost, 127.0.0.1, for security
     // reasons. This binding may cause issues in some environments. For example,
-    // it causes csonnectivity issues running in WSL2, where you cannot reach the
+    // it causes connectivity issues running in WSL2, where you cannot reach the
     // server when it is bound to WSL2's localhost interface. As a workaround,
     // you can choose to bind to all interfaces, 0.0.0.0, instead, but be aware
     // of the security implications when you expose the server on all interfaces.
