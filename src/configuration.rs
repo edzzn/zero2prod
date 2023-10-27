@@ -2,6 +2,7 @@
 pub struct Settings {
     pub database: DatabaseSettings,
     pub application_port: u16,
+    pub sentry_url: String,
 }
 
 #[derive(serde::Deserialize)]
