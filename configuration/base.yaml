@@ -1,9 +1,11 @@
 application:
   port: 8000
+  host: 0.0.0.0
 database:
-  host: "localhost"
+  host: "127.0.0.1"
   port: 5432
   username: "postgres"
   password: "password"
   database_name: "newsletter"
+  require_ssl: false
 sentry_url: "https://e7e841ca8843ef8cdc27efc2fa6c4a93@o4506120189378560.ingest.sentry.io/4506120215396352"
